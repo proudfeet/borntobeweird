@@ -1,0 +1,134 @@
+{% assign search_pagination = settings.pagination_limit %}
+
+<div class="sixteen columns">
+  <div class="section clearfix">
+    <h1>{{ 'general.search.title' | t }}</h1>
+
+
+{% if search.performed %}
+  
+  {% paginate search.results by search_pagination %}
+
+      <div class="breadcrumb eight columns alpha">
+        <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
+        &#62;
+        <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/search" title="{{ 'general.search.title' | t }}" itemprop="url"><span itemprop="title">{{ 'general.search.title' | t }}</span></a></span>       
+      
+        {% if paginate.pages != 0 %}      
+          &#62; {{ 'general.breadcrumbs.page' | t: current_page: paginate.current_page, pages: paginate.pages }}
+        {% endif %}
+      </div>    
+
+      </div>
+    </div>
+  
+    {% if search.results == empty %}  
+      <div class="sixteen columns">
+      	<div class="section clearfix">    
+          <p class="quote">{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>   
+          <br class="clear" />
+          <br class="clear" />      
+        </div>
+      </div>
+    {% else %}  
+
+{% if settings.search_option == 'everything' or search.results.first.price == blank %}
+
+    {% if settings.collection_sidebar %}
+      {% include 'sidebar' %}
+      <div class="twelve columns">
+    {% else %}
+      <div class="sixteen columns">
+    {% endif %}
+
+    {% for item in search.results %}
+      <div class="product_row">
+        
+        {% if item.featured_image %}
+          <div class="four columns alpha">
+             <a href="{{ item.url }}" title="{{ item.title | escape }}">
+               <img src="{{ item.featured_image | product_img_url: 'large' }}"  alt="{{ item.title | escape }}" />
+             </a>
+          </div> 
+        {% endif %}
+        
+        {% if settings.collection_sidebar %}
+          <div class="{% if item.featured_image %}eight{% else %}twelve{% endif %} columns omega align_left">
+        {% else %}
+          <div class="{% if item.featured_image %}twelve{% else %}sixteen{% endif %} columns omega align_left">
+        {% endif %}        
+          <p>
+            <a href="{{item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
+          </p> 
+
+          {% if item.price %}
+            <div class="info">     
+              <span class="price">
+                {% if item.compare_at_price_max > item.price %}
+                  <span class="was_price">{{ item.compare_at_price_max | money }}</span>
+                {% endif %}
+                  
+                {% if item.available %}
+                  {% if item.price_varies %}
+                    {% if item.compare_at_price_max > item.price %}
+                      <br />
+                    {% endif %}
+                    <small><em>{{ 'products.general.from' | t }}</em></small>
+                  {% endif %}
+                  {{ item.price_min | money }}
+                {% else %}
+                  {{ item.price_min | money }} - {{ 'products.product.sold_out' | t }}
+                {% endif %}
+              </span>
+            </div>
+          {% endif %}
+          
+          <p>
+            {{ item.content | strip_html | truncatewords: 40 | highlight: search.terms | replace: 'Description', '' | replace: 'Specs', '' | replace: 'Shipping', '' }}
+          </p>     
+          </div>
+        </div>  
+      <hr />  
+    {% endfor %}  
+  </div>
+
+ {% else %}
+      {% if settings.collection_sidebar %}
+        {% include 'sidebar' %}
+        <div class="twelve columns">
+      {% else %}
+        <div class="sixteen columns">
+      {% endif %}
+
+      {% assign products = search.results %}
+      {% assign products_per_row = settings.products_per_row %}
+      {% include 'product-loop' with settings.collection_sidebar %}
+
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {% include 'pagination' %}      
+  {% endpaginate %}
+
+{% else %}
+
+    </div>
+  </div>
+  <div class="section clearfix">  
+    <div class="ten columns offset-by-three columns center">
+      <p class="extra_padding">
+        {{ 'general.search.description' | t }}
+      </p>
+    </div>    
+    <div class="ten columns offset-by-three">
+      <form class="search" action="/search">
+        {% if settings.search_option != 'everything' %}
+          <input type="hidden" name="type" value="product" />
+        {% endif %}
+        <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms }}" x-webkit-speech autocapitalize="off" autocomplete="off" autocorrect="off" />
+      </form>
+    </div>
+  </div>
+
+{% endif %}

@@ -1,0 +1,177 @@
+<<<form action="/cart" method="post" id="cart_form">
+  <div class="sixteen columns">
+    <div class="section clearfix">
+      <h1>{{ 'cart.general.title' | t }}</h1>
+    </div>
+  </div>
+  
+  {% if cart.item_count == 0 %}
+    <div class="sixteen columns">
+      <div class="section clearfix">
+        <p class="quote">{{ 'cart.general.continue_browsing_html' | t }}</p>    
+      </div>
+    </div>
+  {% else %}
+    
+    <div class="sixteen columns mobile_only">
+      <div class="right align_right">
+        <p>
+          <input type="submit" class="action_button" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
+        </p>
+        
+        {% if additional_checkout_buttons %}
+          <p>
+            {{ content_for_additional_checkout_buttons | google_button_options: 'transparent' }}
+          </p>
+        {% endif %}
+      </div>
+
+      <p class="left">
+        {{ cart.item_count }} {{ 'layout.counts.items' | t: count: cart.item_count }} — <strong>{{ cart.total_price | money_with_currency }}</strong>
+        {% unless settings.tax_included %}
+          <br /><small><em>{{ 'cart.general.excluding_tax_shipping' | t }}</em></small>
+        {% endunless %}
+      </p>
+    </div>
+    
+    
+    <div class="checkout_table_header">    
+      <div class="ten columns">      
+        <h4>{{ 'cart.general.item' | t }}</h4>
+      </div>
+          
+      <div class="two columns">
+        <h4>{{ 'cart.general.price' | t }}</h4>
+      </div>    
+    
+      <div class="one column">
+        <h4>{{ 'cart.general.quantity' | t }}</h4>
+      </div>
+    
+      <div class="three columns">
+        <h4>{{ 'cart.general.total' | t }}</h4>
+      </div>
+    
+      <div class="clear"></div>
+    </div>
+    
+    <ul style="border:0">
+    {% for item in cart.items %}
+      <li style="border:0;list-style:none;padding:0">
+      <div class="four columns product_row">
+        <a href="{{ item.url }}" title="{{ item.title | escape }}">
+          <img src="{{ item | img_url: 'large' }}" alt="{{ item.title | escape }}" />
+        </a>
+      </div> 
+    
+      <div class="six columns title_column">
+        <p class="cart_price">
+          {{ item.price | money }}
+        </p>
+        <p>
+          <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
+        </p> 
+        
+        {% if item.properties %}
+          <p>
+          {% for p in item.properties %}
+            {% unless p.last == blank %}
+              {% if p.last contains '/uploads/' %}
+                {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
+              {% else %}
+                {{ p.first }}: {{ p.last }}<br />
+              {% endif %}
+            {% endunless %}
+          {% endfor %}
+          </p>
+        {% endif %}
+        
+        <p class="cart_description">
+          {{ product.description | strip_html | truncatewords: settings.description_words | replace: 'Description', '' | replace: 'Specs', '' | replace: 'Shipping', '' | replace: 'Details', ''  }}
+        </p>         
+      </div>
+    
+      <div class="two columns">
+        <p class="price_total">
+          {{ item.price | money }}
+        </p>
+      </div>
+
+      <div class="one column mobile_right" id="quantity_{{ forloop.index }}">
+        <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+      </div>
+      
+      <div class="two columns mobile_right">
+        <span class="price_total">{{ item.line_price | money }}</span>
+        
+        <p class="update_or_remove">
+          <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
+          <em>{{ 'cart.general.or' | t }}</em>
+          <a href="#" class="update_subtotal">{{ 'cart.general.update' | t }}</a> 
+        </p>
+      </div>
+      
+      <div class="one column remove_column center">
+        <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="{{ 'cart.general.remove' | t }} {{ 'layout.counts.items.one' | t }}" class="ss-icon remove">&#x2421;</a>
+      </div>
+    
+      <div class="clear"></div>
+      <div class="sixteen columns">
+        <hr />
+      </div>
+    </li>
+    {% endfor %}
+    </ul>
+    <div class="thirteen columns align_right">
+      <h4 class="subtotal">
+        {{ 'cart.general.subtotal' | t }}
+      </h4>
+    </div>
+
+    <div class="three columns">
+      <p class="subtotal_amount">
+        <strong>{{ cart.total_price | money_with_currency }}</strong> 
+        <small id="estimated-shipping" style="display:none">+ <em>{{ 0 | money }}</em> {{ 'cart.shipping_calculator.estimated_shipping' | t }}</small>
+
+        {% unless settings.tax_included %}
+          <small class="excluding_tax"><em>{{ 'cart.general.excluding_tax_shipping' | t }}</em></small>
+        {% endunless %}
+      </p>
+    </div>
+
+    {% if settings.display_special_instructions %} 
+      <div class="four columns mobile_left">
+        <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>
+      </div>
+    
+      <div class="six columns">
+        <textarea id="note" name="note" rows="2">{{ cart.note }}</textarea>        
+      </div>  
+    {% endif %}
+    
+    <div class="three columns update_subtotal_text align_right {% unless settings.display_special_instructions %}offset-by-ten{% endunless %}">
+      <p>
+        <a href="#" class="update_subtotal">{{ 'cart.general.update' | t }}</a>
+        <br />
+        <em>{{ 'cart.general.or' | t }}</em>
+          <a href="{% if cart.items.first.product.collections != blank %}{{ cart.items.first.product.collections.last.url }}{% else %}/collections/all{% endif %}">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
+      </p>
+    </div>
+
+    <div class="three columns">
+      <p>
+        <input type="submit" class="action_button" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
+      </p>
+      
+      {% if additional_checkout_buttons %}
+        <p>
+          {{ content_for_additional_checkout_buttons | google_button_options: 'transparent' }}
+        </p>
+      {% endif %}
+
+    </div>
+
+    {% include 'cart-shipping-calculator' %}
+  {% endif %}
+
+</form>

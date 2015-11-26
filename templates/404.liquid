@@ -1,0 +1,26 @@
+<div class="sixteen columns">
+  <div class="section clearfix">
+    <h1>{{ 'general.404.title' | t }}</h1>
+  </div>
+</div>
+
+<div class="sixteen columns align_right">
+  <div class="section clearfix">
+    <p class="quote">
+      {{ 'general.404.subtext' | t }}
+    </p>
+  </div>
+</div>
+
+<div class="section clearfix">  
+  <div class="sixteen columns center">
+    <p class="extra_padding">
+      {{ 'general.404.continue_shopping_html' | t }}
+    </p>
+  </div>    
+  <div class="eight columns offset-by-four">
+    <form class="search" action="/search">
+      <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms }}" />
+    </form>
+  </div>
+</div>

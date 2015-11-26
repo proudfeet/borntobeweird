@@ -1,0 +1,174 @@
+{% if settings.slideshow_enabled %}
+  {% capture video_slide %}
+    {% if settings.video_embed != blank %}
+      {% if settings.video_width == 'set' %}
+        <li>
+          <div class="video-wrapper" style="width: {{ settings.video_width_px }}px; margin: 0 auto;">
+            <div class="video-container">
+              {{ settings.video_embed }}
+            </div>
+          </div>
+        </li>
+      {% else %}
+        <li>
+          <div class="video-container">
+            {{ settings.video_embed }}
+          </div>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endcapture %}
+
+  <div class="sixteen columns">
+    <div class="section">
+      <div id="homepage_slider" class="flexslider">
+  	    <ul class="slides">
+          {% if settings.video_position == '1' %}{{ video_slide }}{% endif %}
+  	      {% if settings.slideshow_1_enabled %}
+    	    	<li>
+    	    		<a href="{{ settings.image_1_link }}"><img src="{{ 'slideshow_1.jpg' | asset_url }}" alt="{{ settings.image_1_alt_text | escape }}" /></a>
+    	    		{% if settings.image_1_caption != blank %}
+    	    		  <p class="flex-caption">{{ settings.image_1_caption }}</p>
+    	    		{% endif %}
+    	    	</li>
+    	    {% endif %}
+          {% if settings.video_position == '2' %}{{ video_slide }}{% endif %}
+          {% if settings.slideshow_2_enabled %}
+          	<li>
+          		<a href="{{ settings.image_2_link }}"><img src="{{ 'slideshow_2.jpg' | asset_url }}" alt="{{ settings.image_2_alt_text | escape }}" /></a>
+          		{% if settings.image_2_caption != blank %}
+          		  <p class="flex-caption">{{ settings.image_2_caption }}</p>
+          		{% endif %}
+          	</li>
+          {% endif %}
+          {% if settings.video_position == '3' %}{{ video_slide }}{% endif %}
+          {% if settings.slideshow_3_enabled %}
+          	<li>
+          		<a href="{{ settings.image_3_link }}"><img src="{{ 'slideshow_3.jpg' | asset_url }}" alt="{{ settings.image_3_alt_text | escape }}" /></a>
+          		{% if settings.image_3_caption != blank %}
+          		  <p class="flex-caption">{{ settings.image_3_caption }}</p>
+          		{% endif %}
+          	</li>
+          {% endif %}
+          {% if settings.video_position == '4' %}{{ video_slide }}{% endif %}
+          {% if settings.slideshow_4_enabled %}
+          	<li>
+          		<a href="{{ settings.image_4_link }}"><img src="{{ 'slideshow_4.jpg' | asset_url }}" alt="{{ settings.image_4_alt_text | escape }}" /></a>
+          		{% if settings.image_4_caption != blank %}
+          		  <p class="flex-caption">{{ settings.image_4_caption }}</p>
+          		{% endif %}
+          	</li>
+          {% endif %}
+          {% if settings.video_position == '5' %}{{ video_slide }}{% endif %}
+          {% if settings.slideshow_5_enabled %}
+          	<li>
+          		<a href="{{ settings.image_5_link }}"><img src="{{ 'slideshow_5.jpg' | asset_url }}" alt="{{ settings.image_5_alt_text | escape }}" /></a>
+          		{% if settings.image_5_caption != blank %}
+          		  <p class="flex-caption">{{ settings.image_5_caption }}</p>
+          		{% endif %}
+          	</li>
+          {% endif %}
+          {% if settings.video_position == '6' %}{{ video_slide }}{% endif %}
+          {% if settings.slideshow_6_enabled %}
+          	<li>
+          		<a href="{{ settings.image_6_link }}"><img src="{{ 'slideshow_6.jpg' | asset_url }}" alt="{{ settings.image_6_alt_text | escape }}" /></a>
+          		{% if settings.image_6_caption != blank %}
+          		  <p class="flex-caption">{{ settings.image_6_caption }}</p>
+          		{% endif %}
+          	</li>
+          {% endif %}
+  	    </ul>
+    	</div>
+    </div>
+  </div>
+
+{% endif %}
+
+{% if settings.homepage != blank %}
+  <div class="sixteen columns">
+  	<div class="section">
+      <h1 {% if settings.slideshow_enabled %}class="home"{% endif %}>{{ pages[settings.homepage].title }}</h1>
+    </div>
+  </div>
+{% endif %}
+
+{% if settings.frontpage_linklist %}
+  {% assign linklist = linklists[settings.frontpage_linklist] %}
+  {% assign collections_per_row = settings.frontpage_collections_per_row %}
+  {% include 'collection-loop' %}
+{% endif %}
+
+{% if settings.frontpage_collection %}
+  {% assign collection = '' %}
+  {% assign products = collections[settings.frontpage_collection].products %}
+  {% assign products_per_row = settings.frontpage_products_per_row %}
+  <div class="sixteen columns">
+    {% include 'product-loop' %}
+  </div>
+{% endif %}
+
+{% if settings.homepage != blank %}
+  <div class="sixteen columns">
+  	<div class="section clearfix">
+      {{ pages[settings.homepage].content }}
+  	</div>
+  </div>
+{% endif %}
+
+<div class="sixteen columns">
+	<div class="section clearfix">
+
+    {% if settings.blog_widget %}
+      <div class="alpha {% if settings.twitter_widget != blank %}two-thirds column{% else %}sixteen columns omega{% endif %}">
+        <h4 class="title"><a href="{{ blogs[settings.blog_widget_select].url }}">{{ 'home_page.recent_articles' | t }}</a></h4>
+        
+        {% for article in blogs[settings.blog_widget_select].articles limit:4 %}
+          <div class="{% if settings.twitter_widget != blank %}one-third column {% cycle 'alpha', 'omega' %}{% else %}four columns {% cycle 'alpha', '', '', 'omega' %}{% endif %}">
+    
+            <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
+            <div class="meta">
+              <span class="label">{{ article.published_at | date: format: "month_day_year" }}</span>
+            </div>
+    
+            {% if article.excerpt == blank %}
+              <p>
+                {{ article.content | strip_html | truncatewords: 40 }}
+              </p>
+            {% else %}
+              {{ article.excerpt }}
+            {% endif %}                  
+          </div>
+          {% if settings.twitter_widget != blank %}
+            {% cycle '', '<br class="clear" />', '', '' %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if settings.twitter_widget != blank %}
+      <div class="{% if settings.blog_widget %}one-third column{% else %}sixteen columns alpha{% endif %} omega">
+        <h4 class="title"><a href="https://twitter.com/{{ settings.twitter_username }}" target="_blank">{{ 'home_page.tweets' | t }}</a></h4>
+        <a class="twitter-timeline" href="https://twitter.com/{{ settings.twitter_username }}" data-widget-id="319998048782647298" data-screen-name="{{ settings.twitter_username }}" data-chrome="noheader nofooter noborders transparent" data-link-color="{{ settings.link_color }}" data-heading-style="color:{{ settings.link_color }};font-size:{{ settings.regular_font_size }}px;{% if settings.regular_typeface_method == "google_webfonts" %}font-family: {{ settings.regular_google_webfont_font | replace: '+', ' ' }};{% else %}font-family: {{ settings.regular_websafe_font | replace: '+', ' ' }};{% endif %}"></a>
+        <script defer>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if settings.instagram_widget %}
+  <div class="section clearfix">
+    <div class="sixteen columns">
+      <h4 class="title">
+        {% if settings.instagram_link != blank %}
+          <a href="{{ settings.instagram_link }}" target="_blank">
+        {% endif %}
+        {{ settings.instagram_title }}
+        {% if settings.instagram_link != blank %}
+          </a>
+        {% endif %}
+      </h4>
+    </div>
+    
+    <div id="instafeed" data-username="{{ settings.instagram_username | downcase }}" data-client-id="{{ settings.instagram_client_id }}" data-count="{{ settings.instagram_count }}"></div>
+  </div>
+{% endif %}
