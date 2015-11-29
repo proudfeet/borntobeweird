@@ -72,17 +72,19 @@
         {% endif %}
 
         <div class="columns eight clearfix">
-            <a href="{{ shop.url }}">
+            <a class="logo__container columns" href="{{ shop.url }}">
               <h1 class="logo">BTBW</h1>
             </a>
             <div id="mobile_nav"></div>
-            <div id="nav">
-              <ul id="menu">
+            <div class="columns" id="nav">
+              <ul class="menu clearfix" id="menu">
                 {% for link in linklists[settings.main_linklist].links %}
                   {% if linklists[link.handle] == empty %}
-                    <li><a href="{{ link.url }}" title="{{ link.title }}" {% if link.active %}class="active"{% endif %}>{{ link.title }}</a></li>
+                    <li class="menu__item">
+                      <a href="{{ link.url }}" title="{{ link.title }}" class="menu__item-link {% if link.active %}active{% endif %}">{{ link.title }}</a>
+                    </li>
                   {% else %}
-                    <li><a href="{{ link.url }}" title="{{ link.title }}" {% if link.active %}class="active"{% endif %} {% for link in linklists[link.handle].links %}{% if link.active %}class="active"{% endif %}{% endfor %}>{{ link.title }} 
+                    <li class="menu__item"><a href="{{ link.url }}" title="{{ link.title }}" class="menu__item-link {% if link.active %}active{% endif %}" {% for link in linklists[link.handle].links %}{% if link.active %}class="active"{% endif %}{% endfor %}>{{ link.title }} 
                       <span class="arrow">&or;</span></a> 
                       <ul>
                         {% for link in linklists[link.handle].links %}
