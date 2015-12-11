@@ -85,10 +85,8 @@
 {% endif %}
 
 {% if settings.homepage != blank %}
-  <div class="sixteen columns">
-  	<div class="section">
-      <h1 {% if settings.slideshow_enabled %}class="home"{% endif %}>{{ pages[settings.homepage].title }}</h1>
-    </div>
+	<div class="section">
+    <h1 {% if settings.slideshow_enabled %}class="home"{% endif %}>{{ pages[settings.homepage].title }}</h1>
   </div>
 {% endif %}
 
@@ -102,7 +100,7 @@
   {% assign collection = '' %}
   {% assign products = collections[settings.frontpage_collection].products %}
   {% assign products_per_row = settings.frontpage_products_per_row %}
-  <div class="sixteen columns">
+  <div class="homepage__featured wrapper">
     {% include 'product-loop' %}
   </div>
 {% endif %}

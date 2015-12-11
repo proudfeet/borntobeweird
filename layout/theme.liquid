@@ -48,6 +48,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write("<script src='{{ "jquery.min.js" | asset_url }}'>\x3C/script>")</script>
     {{ 'styles.scss.css' | asset_url | stylesheet_tag}}
+    {{ 'justagrid.scss.css' | asset_url |stylesheet_tag }}
     {{ 'app.js' | asset_url | script_tag }}
     {{ 'option_selection.js' | shopify_asset_url | script_tag }}
     {{ content_for_header }}
@@ -63,7 +64,7 @@
     }(document, 'script', 'facebook-jssdk'));</script>
 
     <div class="top_bar">
-      <div class="container">
+      <div class="wrapper clearfix">
         
         {% if settings.show_multiple_currencies %}
           <div class="four columns currencies-switcher mobile_hidden">
@@ -71,13 +72,13 @@
           </div>
         {% endif %}
 
-        <div class="columns eight clearfix">
+        <div class="columns clearfix desk-six tablet-twelve">
             <a class="logo__container columns" href="{{ shop.url }}">
               <h1 class="logo">BTBW</h1>
             </a>
-            <div id="mobile_nav"></div>
+            <div class="" id="mobile_nav"></div>
             <div class="columns" id="nav">
-              <ul class="menu clearfix" id="menu">
+              <ul class="menu clearfix desktop__menu" id="menu">
                 {% for link in linklists[settings.main_linklist].links %}
                   {% if linklists[link.handle] == empty %}
                     <li class="menu__item">
@@ -108,7 +109,7 @@
             </div>
         </div>
 
-        <div class="columns {% if settings.search_box_top_bar and settings.show_multiple_currencies %}eight{% elsif settings.search_box_top_bar or settings.show_multiple_currencies %}eight{% else %}sixteen{% endif %}">
+        <div class="columns {% if settings.search_box_top_bar and settings.show_multiple_currencies %}desk-six tablet-twelve{% elsif settings.search_box_top_bar or settings.show_multiple_currencies %}desk-six tablet-twelve{% else %}desk-twelve{% endif %}">
           <ul>
             <li>
               {% if cart.item_count == 0 %}
@@ -159,26 +160,34 @@
       </div>  
     </div>
   
-    <div class="container content"> 
+    <div class="content clearfix">
       {% if settings.header_social_icons %}
         <div class="header_icons">
           {% include 'social-icons' %}
         </div>
       {% endif %}
-      <div class="sixteen columns logo">
-        <a href="{{ shop.url }}" title="{{ shop.name }}">
-          {% if settings.use_logo %}
-            <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" />
-          {% else %}
-            {{ shop.name }}
-          {% endif %}
-        </a>
-      </div>
+
+      {% if template == "index" %}
+        <div class="home__hero" title="Born to be Weird, photo by Chalffy Chan, courtesy of Unsplash.com">
+        </div>
+      {% endif %}
+
+      <div class="wrapper clearfix">
+      {% comment %} open wrapper {% endcomment %}
+        <div class="logo section">
+          <a href="{{ shop.url }}" title="{{ shop.name }}">
+            {% if settings.use_logo %}
+              <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" />
+            {% else %}
+              {{ shop.name }}
+            {% endif %}
+          </a>
+        </div>
       
 
       
       {% if settings.featured_content_page != blank %}
-        <div class="sixteen columns">
+        <div class="columns desk-twelve">
           <div class="section clearfix featured_content">
             {{ pages[settings.featured_content_page].content }}
           </div>
@@ -190,6 +199,10 @@
       {% else %}
         {{ content_for_layout }}
       {% endif %}
+
+      {% comment %} close wrapper {% endcomment %}
+      </div> 
+      
       
     </div> <!-- end container -->
 

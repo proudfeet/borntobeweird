@@ -6,6 +6,10 @@
 
 
 .top_bar {
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+
 
 	.top_bar_search {
 		padding-right: 10px;
@@ -53,13 +57,24 @@
 			transition: all 0.2s;
 
 			&.active {
-				color: #62acd3;
+				// color: #62acd3;
+				color: white;
 			}
 
 			&:hover {
-				background: #333;
-				text-shadow: 0px 1px 0px #333, 0px 2px 0px #333, 0px 3px 0px rgba(255, 255, 255, 0.2);
+				text-shadow: 0px 1px 0px black, 0px 2px 0px black, 0px 3px 0px black;
+				color: #5EC9AF; //green tuquoise 
 			}
 		}	
 	}
+}
+
+div.content {
+	padding: 75px 0 15px;
+}
+
+.home__hero {
+	padding-top: 42%;
+	background: url("https://images.unsplash.com/photo-1441943250180-ea34e997ffad?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1e3aec2a82ef572d4e54eff183b20a46");
+	background-size: cover;
 }
