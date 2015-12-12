@@ -36,6 +36,7 @@
 		margin-bottom: 0;
 		border-bottom: none;
 		height: 100%;
+		max-width: 40px;
 	}
 
 	#nav {
@@ -77,4 +78,33 @@ div.content {
 	padding-top: 42%;
 	background: url("https://images.unsplash.com/photo-1441943250180-ea34e997ffad?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1e3aec2a82ef572d4e54eff183b20a46");
 	background-size: cover;
+	position: relative;
+
+	.hero__content-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	.hero__header,
+	.hero__subheader {
+		color: white;
+		text-align: left;
+		line-height: 1;
+		border-bottom: none;
+		text-shadow: 0 0 100px #333, 1px 1px 0 rgba(0, 0, 0, 0.3), 0 1px 0 rgba(0, 0, 0, 0.3);
+	}
+
+	.hero__header {
+		padding: 15% 10px 0;
+		font-size: 92px;
+		font-weight: bold;
+		letter-spacing: -1px;
+	}
+
+	.hero__subheader {
+		padding: 0 10px;
+	}
 }

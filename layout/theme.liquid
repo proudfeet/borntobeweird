@@ -74,7 +74,7 @@
 
         <div class="columns clearfix desk-six tablet-twelve">
             <a class="logo__container columns" href="{{ shop.url }}">
-              <h1 class="logo">BTBW</h1>
+              <h1 class="logo">{{"bornToBeWeirdLogoV1Small.png" | asset_url | img_tag }}</h1>
             </a>
             <div class="" id="mobile_nav"></div>
             <div class="columns" id="nav">
@@ -169,6 +169,12 @@
 
       {% if template == "index" %}
         <div class="home__hero" title="Born to be Weird, photo by Chalffy Chan, courtesy of Unsplash.com">
+          <div class="hero__content-container">
+            <div class="wrapper">
+              <h1 class="hero__header">Born to be Weird</h1>
+              <h3 class="hero__subheader">Waving at "normal" as it passes by</h3>
+            </div>
+          </div>
         </div>
       {% endif %}
 
