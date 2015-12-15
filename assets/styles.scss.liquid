@@ -1,3 +1,6 @@
+$tablet: 767px;
+$mobile: 480px;
+
 *,
 *::before,
 *::after {
@@ -29,6 +32,11 @@
 		margin: 0;
 		padding: 0 10px;
 		height: 75px;
+		float: left;
+
+		@media screen and (max-width: $tablet) {
+			float: none;
+		}
 	}
 
 	.logo {
@@ -44,10 +52,27 @@
 		margin: 0;
 		padding: 0;
 
+		@media screen and (max-width: $tablet) {
+			position: absolute;
+			top: 75px;
+			z-index: 9999;
+			background: #222;
+			width: 100%;
+			left: -100%;
+			transition: all 0.3s;
+		}
+
 		.menu__item {
 			float: left;
 			padding: 0;
 			border: 0;
+
+			@media screen and (max-width: $tablet) {
+				float: none;
+				display: block;
+				border-top: 1px solid rgba(255, 255, 255, 0.3);
+			}
+
 		}
 
 		.menu__item-link {
@@ -57,16 +82,62 @@
 			color: #eee;
 			transition: all 0.2s;
 
+			@media screen and (max-width: $tablet) {
+				height: 40px;
+				line-height: 40px;
+			}
+
 			&.active {
-				// color: #62acd3;
 				color: white;
 			}
 
 			&:hover {
 				text-shadow: 0px 1px 0px black, 0px 2px 0px black, 0px 3px 0px black;
-				color: #5EC9AF; //green tuquoise 
+				color: white;
 			}
 		}	
+	}
+
+	.nav-toggle-label {
+		height: 75px;
+		padding-top: 20px;
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		.toggle__text,
+		.toggle__icon {
+			color: white;
+			display: block;
+			font-family: Futura, 'Century Gothic', AppleGothic, sans-serif;
+		}
+
+		.toggle__text {
+			font-size: 8px;
+			text-transform: uppercase;
+			line-height: 8px;
+		}
+
+		.toggle__icon {
+			font-size: 36px;
+		}
+	}
+
+	.mobile__toggle {
+		position: absolute;
+		left: -9999%;
+	}
+
+	.mobile__toggle:checked + #nav {
+		left: 0;
+	}
+
+	.slicknav_nav {
+
+		.menu__item {
+			float: none;
+		}
 	}
 }
 

@@ -73,11 +73,15 @@
         {% endif %}
 
         <div class="columns clearfix desk-six tablet-twelve">
-            <a class="logo__container columns" href="{{ shop.url }}">
+            <label class="columns tablet-two tablet-down nav-toggle-label" for="mobile-nav-toggle" title="Mobile menu toggle">
+              <span class="toggle__text">Menu</span>
+              <span class="toggle__icon">&#x2261;</span>
+            </label>
+            <a class="logo__container columns tablet-eight" href="{{ shop.url }}">
               <h1 class="logo">{{"bornToBeWeirdLogoV1Small.png" | asset_url | img_tag }}</h1>
             </a>
-            <div class="" id="mobile_nav"></div>
-            <div class="columns" id="nav">
+            <input class="mobile__toggle" type="checkbox" id="mobile-nav-toggle">
+            <div class="columns tablet-twelve" id="nav">
               <ul class="menu clearfix desktop__menu" id="menu">
                 {% for link in linklists[settings.main_linklist].links %}
                   {% if linklists[link.handle] == empty %}
@@ -107,9 +111,13 @@
                 {% endfor %}
               </ul>
             </div>
+
+
+
+            {% comment %}end top{% endcomment %}
         </div>
 
-        <div class="columns {% if settings.search_box_top_bar and settings.show_multiple_currencies %}desk-six tablet-twelve{% elsif settings.search_box_top_bar or settings.show_multiple_currencies %}desk-six tablet-twelve{% else %}desk-twelve{% endif %}">
+        <div class="columns {% if settings.search_box_top_bar and settings.show_multiple_currencies %}desk-six tablet-two{% elsif settings.search_box_top_bar or settings.show_multiple_currencies %}desk-six tablet-two{% else %}desk-twelve{% endif %}">
           <ul>
             <li>
               {% if cart.item_count == 0 %}
