@@ -33,10 +33,6 @@ $mobile: 480px;
 		padding: 0 10px;
 		height: 75px;
 		float: left;
-
-		@media screen and (max-width: $tablet) {
-			float: none;
-		}
 	}
 
 	.logo {
@@ -133,10 +129,15 @@ $mobile: 480px;
 		left: 0;
 	}
 
-	.slicknav_nav {
+	a.cart_btn {
+		height: auto;
+		line-height: normal;
+		padding: 25px 0 20px 22px;
+		background-position: left 25px;
 
-		.menu__item {
-			float: none;
+		&:hover,
+		&:focus {
+			background-position: left 25px;
 		}
 	}
 }

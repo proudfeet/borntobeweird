@@ -63,7 +63,10 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
+    {% comment %}open top_bar{% endcomment %}
     <div class="top_bar">
+
+      {% comment %}open top_bar wrapper{% endcomment %}
       <div class="wrapper clearfix">
         
         {% if settings.show_multiple_currencies %}
@@ -72,16 +75,21 @@
           </div>
         {% endif %}
 
-        <div class="columns clearfix desk-six tablet-twelve">
-            <label class="columns tablet-two tablet-down nav-toggle-label" for="mobile-nav-toggle" title="Mobile menu toggle">
+        {% comment %}open to inner container{% endcomment %}
+        <div class="columns clearfix desk-twelve">
+          
+            <label class="columns tablet-four tablet-down nav-toggle-label" for="mobile-nav-toggle" title="Mobile menu toggle">
               <span class="toggle__text">Menu</span>
               <span class="toggle__icon">&#x2261;</span>
             </label>
-            <a class="logo__container columns tablet-eight" href="{{ shop.url }}">
+
+            <a class="logo__container columns desk-one tablet-four" href="{{ shop.url }}">
               <h1 class="logo">{{"bornToBeWeirdLogoV1Small.png" | asset_url | img_tag }}</h1>
             </a>
+
             <input class="mobile__toggle" type="checkbox" id="mobile-nav-toggle">
-            <div class="columns tablet-twelve" id="nav">
+            {% comment %}open nav{% endcomment %}
+            <div class="columns desk-five tablet-twelve" id="nav">
               <ul class="menu clearfix desktop__menu" id="menu">
                 {% for link in linklists[settings.main_linklist].links %}
                   {% if linklists[link.handle] == empty %}
@@ -111,62 +119,33 @@
                 {% endfor %}
               </ul>
             </div>
+            {% comment %}close nav{% endcomment %}
 
-
-
-            {% comment %}end top{% endcomment %}
-        </div>
-
-        <div class="columns {% if settings.search_box_top_bar and settings.show_multiple_currencies %}desk-six tablet-two{% elsif settings.search_box_top_bar or settings.show_multiple_currencies %}desk-six tablet-two{% else %}desk-twelve{% endif %}">
-          <ul>
-            <li>
-              {% if cart.item_count == 0 %}
-                <a href="/cart" title="{{ 'layout.general.checkout' | t }}" class="checkout">{{ 'layout.general.checkout' | t }}</a>
-              {% else %}
-                <a href="/checkout" title="{{ 'layout.general.checkout' | t }}" class="checkout">{{ 'layout.general.checkout' | t }}</a>
-              {% endif %}
-            </li>
-            <li>
-              <a href="/cart" class="cart" title="{{ 'layout.general.cart' | t }}">{{ 'layout.general.cart' | t }} ({{ cart.item_count }})</a>
-            </li>
-
-            {% if shop.customer_accounts_enabled %}
-              {% if customer %}
+            <div class="columns {% if settings.search_box_top_bar and settings.show_multiple_currencies %}desk-six tablet-four{% elsif settings.search_box_top_bar or settings.show_multiple_currencies %}desk-six tablet-four{% else %}desk-twelve{% endif %}">
+              <ul class="clearfix">
                 <li>
-                  {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                  <a href="/cart" class="cart cart_btn" title="{{ 'layout.general.cart' | t }}">{{ 'layout.general.cart' | t }} ({{ cart.item_count }})</a>
                 </li>
-                <li>
-                  <a href="/account">{{ customer.name }}</a>
-                </li>
-              {% else %}
-                <li>
-                  {{ 'layout.customer.log_in' | t | customer_login_link }}
-                </li>
-              {% endif %}
-            {% endif %}
 
-            {% if settings.top_bar_linklist != blank %}
-              {% for link in linklists[settings.top_bar_linklist].links %}
-                <li>
-                  <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
-                </li>
-              {% endfor %}
-            {% endif %}
-          </ul>
-
-          {% if settings.search_box_top_bar %}
-            <div class="top_bar_search clearfix">          
-              <form class="search right" action="/search">
-                {% if settings.search_option != 'everything' %}
-                  <input type="hidden" name="type" value="product" />
+                {% if settings.top_bar_linklist != blank %}
+                  {% for link in linklists[settings.top_bar_linklist].links %}
+                    <li>
+                      <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
                 {% endif %}
-                <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
-              </form>
+              </ul>
+
             </div>
-          {% endif %}   
+
         </div>
-      </div>  
+        {% comment %}end top inner container{% endcomment %}
+        
+      </div>
+      {% comment %}close top_bar wrapper{% endcomment %}
+
     </div>
+    {% comment %}close top_bar{% endcomment %}
   
     <div class="content clearfix">
       {% if settings.header_social_icons %}
