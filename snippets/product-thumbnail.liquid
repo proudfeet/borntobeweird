@@ -1,7 +1,7 @@
 {% if product-thumbnail %}
-  <div class="{% if products_per_row == "2" %}desk-six tablet-twelve columns {% cycle 'alpha', 'omega' %}{% elsif products_per_row == "3" %}desk-four tablet-twelve columns {% cycle 'alpha', '', 'omega' %}{% else %}desk-three tablet-twelve columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+  <div class="{% if products_per_row == "2" %}desk-six mobile-twelve columns {% elsif products_per_row == "3" %}desk-four tablet-six mobile-twelve columns {% else %}desk-three tablet-six mobile-twelve columns {% endif %} thumbnail {% cycle 'even', 'odd' %}">
 {% else %}
-  <div class="{% if products_per_row == "2" %}desk-six tablet-twelve columns {% cycle 'alpha', 'omega' %}{% elsif products_per_row == "3" %}desk-four tablet-twelve column {% cycle 'alpha', '', 'omega' %}{% else %}desk-three tablet-twelve columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+  <div class="{% if products_per_row == "2" %}desk-six tablet-six mobile-twelve columns {% elsif products_per_row == "3" %}desk-four tablet-six mobile-twelve columns {% else %}desk-three tablet-six mobile-twelve columns {% endif %} thumbnail {% cycle 'even', 'odd' %}">
 {% endif %}
 
   {% if product.featured_image.alt contains 'youtube' or image.alt contains 'vimeo' %}

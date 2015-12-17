@@ -1,10 +1,10 @@
 {% paginate collection.products by settings.pagination_limit %}
 
-  <div class="sixteen columns">
+  <div class="columns desk-twelve">
     <div class="section clearfix">    
       <h1><a href="{{ collection.url }}" title="{{ collection.title | escape }}">{{ collection.title }}</a></h1>
 
-      <div class="breadcrumb eight columns alpha">
+      <div class="section breadcrumb columns desk-six tablet-twelve">
         <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
         &#62;
         <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url"><span itemprop="title">{{ collection.title }}</span></a></span>       
@@ -23,10 +23,10 @@
   
       {% if collection.handle != blank and collection.products_count > 0 %}
         {% if settings.collection_tags %}        
-          <div class="four columns section_select {% unless settings.collection_sort %}offset-by-four omega{% endunless %}">
+          <div class="columns desk-three tablet-six section_select {% unless settings.collection_sort %}offset-by-four omega{% endunless %}">
             {% for tag in collection.all_tags %}
               {% if forloop.first %}
-                <label for="tag_filter" class="inline">{{ 'collections.sorting.filter' | t }}: </label> 
+                <label for="tag_filter">{{ 'collections.sorting.filter' | t }}: </label> 
                 <select name="tag_filter" id="tag_filter">
                   <option {% unless current_tags %}selected="selected"{% endunless %} value="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}">{{ 'collections.general.all_collection_title' | t: title: collection.title }}</option>
               {% endif %}          
@@ -43,8 +43,8 @@
         {% endif %}
 
         {% if settings.collection_sort %}
-          <div class="four columns section_select omega {% unless settings.collection_tags %}offset-by-four{% endunless %}">
-            <label for="sort-by" class="inline">{{ 'collections.sorting.title' | t }}: </label> 
+          <div class="columns desk-three tablet-six section_select {% unless settings.collection_tags %}offset-by-four{% endunless %}">
+            <label for="sort-by">{{ 'collections.sorting.title' | t }}: </label> 
             <select id="sort-by">
               <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
               <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
@@ -81,7 +81,7 @@
     {% include 'sidebar' %}
     <div class="twelve columns">
   {% else %}
-    <div class="sixteen columns">
+    <div class="section collection__container">
   {% endif %}
 
   {% if collection.products.size == 0 %}

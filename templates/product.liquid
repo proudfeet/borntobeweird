@@ -1,21 +1,18 @@
-<div class="sixteen columns">
-  <div class="clearfix breadcrumb product_breadcrumb">
-    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
-    &#62;
-    <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-      {% if collection %}
-        <a href="{{ collection.url }}" title="{{ collection.title | escape }}">{{ collection.title }}</a>
-      {% else %}
-        <a href="/collections/all" title="{{ collections.all.title }}">{{ collections.all.title }}</a>      
-      {% endif %}
-    </span>
-    &#62;
-    {{ product.title }}
-  </div>
+<div class="columns desk-twelve section clearfix breadcrumb product_breadcrumb">
+  <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
+  &#62;
+  <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+    {% if collection %}
+      <a href="{{ collection.url }}" title="{{ collection.title | escape }}">{{ collection.title }}</a>
+    {% else %}
+      <a href="/collections/all" title="{{ collections.all.title }}">{{ collections.all.title }}</a>      
+    {% endif %}
+  </span>
+  &#62;
+  {{ product.title }}
 </div>
 
-<div class="sixteen columns" itemscope itemtype="http://data-vocabulary.org/Product" id="product-{{ product.id }}">
-	<div class="section product_section clearfix">
+<div class="product__container section product_section clearfix" itemscope itemtype="http://data-vocabulary.org/Product" id="product-{{ product.id }}">
 	  
   	 {% if settings.product_images_position == 'left' %}             
        {% assign products_per_row = settings.products_per_row %}
@@ -27,7 +24,7 @@
        {% endif %}
      {% endif %}
 
-     <div class="six columns {%if settings.product_images_position == 'left' %}omega{% else %}alpha{% endif %}">
+     <div class="columns desk-six tablet-twelve">
        <h1 class="product_name" itemprop="name">{{ product.title }}</h1>
 
       {% assign variant = product.selected_or_first_available_variant %}
@@ -144,7 +141,6 @@
       {% endif %}
     {% endif %}
     
-  </div>
    
   {% if product.description contains "<!-- split -->"  %}
     <br class="clear" />
