@@ -17,7 +17,8 @@
     {% endif %}
 
     <div class="info"> 
-      <span class="title">{{ product.title }}</span>                                             
+      <span class="title">{{ product.title }}</span>
+      <span class="product_sku hide">{{ product.sku }}</span>                                             
       <span class="price">
         {% if product.compare_at_price_max > product.price %}
           <span class="was_price">{{ product.compare_at_price_max | money }}</span>
@@ -53,10 +54,10 @@
 
     <div class="modal" id="product-{{ product.id }}">
       <div title="{{ 'layout.general.close_window' | t }}" class="fancybox-close"></div>
-      <div class="nine columns alpha modal_image feature_image">
+      <div class="columns section desk-six tablet-twelve modal_image feature_image">
         <img src="{{ product.featured_image | product_img_url: 'grande' }}" alt="{{ alt_text | escape }}" />
       </div>
-      <div class="five columns">
+      <div class="columns section desk-six tablet-twelve clearfix">
         <h3>{{ product.title }}</h3>
 
         <p class="modal_price">
@@ -72,6 +73,8 @@
 
         {% include 'product-notify-me' %}
 
+        {% include 'product-form' %}
+
         {% if settings.product_description_position == "top" %}
           {% if settings.quick_shop_full_description %}
             {{ product.description | split: '<!-- split -->' | first }}
@@ -84,8 +87,6 @@
             <a href="{{ product.url | within: collection }}" class="view_product_info" title="{{ product.title | escape }}">{{ 'collections.general.view_product_details_html' | t }}</a>
           </p>
         {% endif %}
-    
-        {% include 'product-form' %}
 
         {% if settings.product_description_position == "bottom" %}
           {% if settings.quick_shop_full_description %}

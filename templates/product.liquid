@@ -49,13 +49,6 @@
      
        {% include 'product-notify-me' %}
 
-       {% if settings.product_description_position == "top" %}
-        {% if product.description != blank %}
-         <div class="description" itemprop="description">
-           {{ product.description | split: '<!-- split -->' | first }}
-         </div>
-        {% endif %}
-       {% endif %}
        {% include 'product-form' with 'product' %}
        {% if settings.product_description_position == "bottom" %}
         {% if product.description != blank %}
@@ -65,6 +58,14 @@
         {% endif %}
        {% endif %}
 
+       {% if settings.product_description_position == "top" %}
+        {% if product.description != blank %}
+         <div class="description" itemprop="description">
+           {{ product.description | split: '<!-- split -->' | first }}
+         </div>
+        {% endif %}
+       {% endif %}
+      
        <hr />
      
        <div class="meta">
@@ -170,16 +171,12 @@
   {% endfor %}
 
   {% if col and collections[col].all_products_count > 0 %}
-    <div class="sixteen columns">
-      <div class="section clearfix">
-        <h2>{{ 'products.product.related_items' | t }}</h2>
-      </div>
-    </div>
+    <div class="section related__container">
+      <h2>{{ 'products.product.related_items' | t }}</h2>
 
-    {% assign skip_product = product %}
-    {% assign products = collections[col].products %}
-    {% assign products_per_row = settings.products_per_row %}
-    <div class="sixteen columns">
+      {% assign skip_product = product %}
+      {% assign products = collections[col].products %}
+      {% assign products_per_row = settings.products_per_row %}
       {% include 'product-loop' %}
     </div>
   {% endif %}

@@ -1,12 +1,11 @@
-<div class="five columns offset-by-one sidebar">
-  <h4 class="title" style="padding-bottom:0"><a href="{{ blogs[blog-sidebar].url }}.atom" class="subscribe" title="{{ 'blogs.sidebar.subscribe_with_rss' | t }}" target="_blank"><span class="ss-icon">&#xE310;</span> <span class="text">{{ 'blogs.sidebar.subscribe' | t }}</span></a> {% if settings.twitter_link != blank %}&nbsp; <a href="{{ settings.twitter_link }}" class="twitter" title="{{ 'blogs.sidebar.follow_shop' | t: shop_name: shop.name }}" target="_blank"><span class="ss-icon">&#xF611;</span> <span class="text">{{ 'blogs.sidebar.follow_us' | t }}</span></a>{% endif %}</h4>
+<div class="columns desk-three tablet-twelve sidebar">
 
+  <h4>{{ 'blogs.sidebar.recent_articles' | t }}</h4>
+  
   <form class="search" action="/search">
     <input type="hidden" name="type" value="article" />
     <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.title' | t }} {{ blog.title | escape }}..." value="{{ search.terms }}" />
   </form>
-
-  <h4>{{ 'blogs.sidebar.recent_articles' | t }}</h4>
   
   <ul class="blog_list">
     {% for article in blogs[blog-sidebar].articles limit:5 %}

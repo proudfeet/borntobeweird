@@ -1,30 +1,30 @@
 {% paginate blog.articles by 7 %}
 
-  <div class="sixteen columns">
-    <div class="section clearfix">
-      <h1><a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a></h1>
-      
-        <div class="breadcrumb sixteen columns alpha omega">
-          <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
+  <div class="section page__header columns desk-twelve">
+    <h1>
+      <a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a>
+    </h1>
+    
+    <div class="breadcrumb">
+      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span> 
+      &#62;
+      <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ blog.url }}" title="{{ blog.title | escape }}" itemprop="url"><span itemprop="title">{{ blog.title }}</span></a></span>       
+
+      {% if current_tags %}
+        {% for tag in current_tags %}
           &#62;
-          <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ blog.url }}" title="{{ blog.title | escape }}" itemprop="url"><span itemprop="title">{{ blog.title }}</span></a></span>       
+        
+          <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url}}/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" title="{{ blog.title }} {{ 'blogs.general.tagged' | t }} {{ tag | escape }}" itemprop="url"><span itemprop="title">{{ tag }}</span></a></span>       
+        {% endfor %}
+      {% endif %}
 
-          {% if current_tags %}
-            {% for tag in current_tags %}
-              &#62;
-            
-              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url}}/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" title="{{ blog.title }} {{ 'blogs.general.tagged' | t }} {{ tag | escape }}" itemprop="url"><span itemprop="title">{{ tag }}</span></a></span>       
-            {% endfor %}
-          {% endif %}
-
-          &#62; {{ 'general.breadcrumbs.page' | t: current_page: paginate.current_page, pages: paginate.pages }}
-        </div>
+      &#62; {{ 'general.breadcrumbs.page' | t: current_page: paginate.current_page, pages: paginate.pages }}
     </div>
   </div>
 
-  <div class="ten columns">
+  <div class="columns desk-nine tablet-twelve blog-collection__container">
     {% for article in blog.articles %}
-      <div class="clearfix article">
+      <div class="blog-collection__article">
         <h3><a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a></h3>
       
         <p class="meta">

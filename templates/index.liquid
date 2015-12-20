@@ -100,7 +100,7 @@
   {% assign collection = '' %}
   {% assign products = collections[settings.frontpage_collection].products %}
   {% assign products_per_row = settings.frontpage_products_per_row %}
-  <div class="homepage__featured wrapper">
+  <div class="clearfix homepage__featured wrapper">
     {% include 'product-loop' %}
   </div>
 {% endif %}
