@@ -11,6 +11,10 @@ $mobile: 480px;
 	display: none;
 }
 
+body {
+	background: url("white_wall_hash.png");
+}
+
 
 .top_bar {
 	position: fixed;
@@ -201,5 +205,32 @@ div.content {
 
 	.hero__subheader {
 		padding: 0 10px;
+	}
+}
+
+// ****************
+// ****  CART  ****
+// ****************
+
+.cart {
+
+	.subtotal {
+		text-align: center;
+		border-bottom: none;
+		font-weight: bold;
+	}
+}
+
+.cart__product {
+	
+	&:last-of-type {
+		
+		&:after {
+			content: "";
+			display: block;
+			margin: 10px auto 0;
+			border-bottom: 1px solid #222;
+			width: calc(100% - 20px);
+		}
 	}
 }

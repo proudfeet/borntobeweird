@@ -42,7 +42,7 @@
         <h4 class="center">{{ 'cart.general.price' | t }}</h4>
       </div>    
     
-      <div class="columns desk-two">
+      <div class="columns desk-one">
         <h4 class="center">{{ 'cart.general.quantity' | t }}</h4>
       </div>
     
@@ -53,6 +53,7 @@
       <div class="clear"></div>
     </div>
     
+    {% comment %} open cart item list {% endcomment %}
     <ul class="cart__product-list">
     {% for item in cart.items %}
       <li class="cart__product">
@@ -95,11 +96,11 @@
           </p>
         </div>
 
-        <div class="columns desk-two center mobile_right" id="quantity_{{ forloop.index }}">
+        <div class="columns desk-one center mobile_right" id="quantity_{{ forloop.index }}">
           <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
         </div>
       
-        <div class="columns desk-one center mobile_right">
+        <div class="columns desk-two center mobile_right">
           <span class="price_total">{{ item.line_price | money }}</span>
           
           <p class="update_or_remove">
@@ -120,14 +121,18 @@
       </li>
     {% endfor %}
     </ul>
-    <div class="thirteen columns align_right">
+    {% comment %} close cart item list {% endcomment %}
+
+    <div class="columns spacer desk-eight">&nbsp;</div>
+
+    <div class="columns desk-two">
       <h4 class="subtotal">
         {{ 'cart.general.subtotal' | t }}
       </h4>
     </div>
 
-    <div class="three columns">
-      <p class="subtotal_amount">
+    <div class="columns desk-two">
+      <p class="subtotal_amount center">
         <strong>{{ cart.total_price | money_with_currency }}</strong> 
         <small id="estimated-shipping" style="display:none">+ <em>{{ 0 | money }}</em> {{ 'cart.shipping_calculator.estimated_shipping' | t }}</small>
 
@@ -147,16 +152,21 @@
       </div>  
     {% endif %}
     
-    <div class="three columns update_subtotal_text align_right {% unless settings.display_special_instructions %}offset-by-ten{% endunless %}">
-      <p>
+
+    <div class="spacer columns desk-eight">&nbsp;</div>
+
+    <div class="columns desk-two update_subtotal_text align_right {% unless settings.display_special_instructions %}offset-by-ten{% endunless %}">
+      <p class="center">
         <a href="#" class="update_subtotal">{{ 'cart.general.update' | t }}</a>
         <br />
         <em>{{ 'cart.general.or' | t }}</em>
-          <a href="{% if cart.items.first.product.collections != blank %}{{ cart.items.first.product.collections.last.url }}{% else %}/collections/all{% endif %}">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
+        <br />
+        <a href="{% if cart.items.first.product.collections != blank %}{{ cart.items.first.product.collections.last.url }}{% else %}/collections/all{% endif %}">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
       </p>
+        
     </div>
 
-    <div class="three columns">
+    <div class="columns desk-two">
       <p>
         <input type="submit" class="action_button" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
       </p>
