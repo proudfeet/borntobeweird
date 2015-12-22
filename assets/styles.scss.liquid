@@ -163,6 +163,10 @@ div.content {
 	background-size: cover;
 	position: relative;
 
+	@media screen and (max-width: $mobile) {
+		padding-top: 50%;
+	}
+
 	.hero__content-container {
 		position: absolute;
 		top: 0;
@@ -185,6 +189,14 @@ div.content {
 		font-size: 92px;
 		font-weight: bold;
 		letter-spacing: -1px;
+
+		@media screen and (max-width: $tablet) {
+			font-size: 54px;
+		}
+
+		@media screen and (max-width: $mobile) {
+			font-size: 36px;
+		}
 	}
 
 	.hero__subheader {
