@@ -11,30 +11,8 @@
     </div>
   {% else %}
     
-    <div class="sixteen columns mobile_only">
-      <div class="right align_right">
-        <p>
-          <input type="submit" class="action_button" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
-        </p>
-        
-        {% if additional_checkout_buttons %}
-          <p>
-            {{ content_for_additional_checkout_buttons | google_button_options: 'transparent' }}
-          </p>
-        {% endif %}
-      </div>
-
-      <p class="left">
-        {{ cart.item_count }} {{ 'layout.counts.items' | t: count: cart.item_count }} — <strong>{{ cart.total_price | money_with_currency }}</strong>
-        {% unless settings.tax_included %}
-          <br /><small><em>{{ 'cart.general.excluding_tax_shipping' | t }}</em></small>
-        {% endunless %}
-      </p>
-    </div>
-    
-    
     <div class="checkout_table_header">    
-      <div class="columns desk-six">      
+      <div class="columns desk-six mobile-four">      
         <h4 class="center">{{ 'cart.general.item' | t }}</h4>
       </div>
           
@@ -42,7 +20,7 @@
         <h4 class="center">{{ 'cart.general.price' | t }}</h4>
       </div>    
     
-      <div class="columns desk-one">
+      <div class="columns desk-one mobile-two">
         <h4 class="center">{{ 'cart.general.quantity' | t }}</h4>
       </div>
     
@@ -57,13 +35,13 @@
     <ul class="cart__product-list">
     {% for item in cart.items %}
       <li class="cart__product">
-        <div class="columns desk-three product_row">
+        <div class="columns desk-three product_row mobile-two">
           <a href="{{ item.url }}" title="{{ item.title | escape }}">
             <img src="{{ item | img_url: 'large' }}" alt="{{ item.title | escape }}" />
           </a>
         </div> 
     
-        <div class="columns desk-three title_column">
+        <div class="columns desk-three title_column mobile-two">
           <p>
             <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
           </p> 
@@ -85,32 +63,28 @@
           <p class="cart_description">
             {{ item.product.description | strip_html | truncatewords: settings.description_words | replace: 'Description', '' | replace: 'Specs', '' | replace: 'Shipping', '' | replace: 'Details', ''  }}
           </p>
-          <p class="cart_sku">
+          <p class="cart_sku mobile-hide">
             SKU: {{ item.sku }}
           </p>  
         </div>
+
+        <div class="clear mobile-down"></div>
     
-        <div class="columns desk-two center">
+        <div class="columns desk-two center mobile-two">
           <p class="price_total">
             {{ item.price | money }}
           </p>
         </div>
 
-        <div class="columns desk-one center mobile_right" id="quantity_{{ forloop.index }}">
-          <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+        <div class="columns desk-one mobile-two center" id="quantity_{{ forloop.index }}">
+          <input type="number" min="0" size="2" class="quantity center" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
         </div>
       
-        <div class="columns desk-two center mobile_right">
+        <div class="columns desk-two mobile-two center">
           <span class="price_total">{{ item.line_price | money }}</span>
-          
-          <p class="update_or_remove">
-            <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
-            <em>{{ 'cart.general.or' | t }}</em>
-            <a href="#" class="update_subtotal">{{ 'cart.general.update' | t }}</a> 
-          </p>
         </div>
       
-        <div class="columns desk-one remove_column center">
+        <div class="columns desk-one mobile-two remove_column center">
           <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="{{ 'cart.general.remove' | t }} {{ 'layout.counts.items.one' | t }}" class="ss-icon remove">&#x2421;</a>
         </div>
     
@@ -123,15 +97,15 @@
     </ul>
     {% comment %} close cart item list {% endcomment %}
 
-    <div class="columns spacer desk-eight">&nbsp;</div>
+    <div class="columns spacer desk-six tablet-two mobile-hide">&nbsp;</div>
 
-    <div class="columns desk-two">
+    <div class="columns desk-three tablet-four mobile-six">
       <h4 class="subtotal">
         {{ 'cart.general.subtotal' | t }}
       </h4>
     </div>
 
-    <div class="columns desk-two">
+    <div class="columns desk-three tablet-four mobile-six">
       <p class="subtotal_amount center">
         <strong>{{ cart.total_price | money_with_currency }}</strong> 
         <small id="estimated-shipping" style="display:none">+ <em>{{ 0 | money }}</em> {{ 'cart.shipping_calculator.estimated_shipping' | t }}</small>
@@ -141,6 +115,8 @@
         {% endunless %}
       </p>
     </div>
+
+    <div class="columns spacer tablet-two tablet-down mobile-hide">&nbsp;</div>
 
     {% if settings.display_special_instructions %} 
       <div class="four columns mobile_left">
@@ -152,10 +128,11 @@
       </div>  
     {% endif %}
     
+    <hr class="columns tablet-down reset" />
 
-    <div class="spacer columns desk-eight">&nbsp;</div>
+    <div class="columns spacer desk-six tablet-two mobile-hide">&nbsp;</div>
 
-    <div class="columns desk-two update_subtotal_text align_right {% unless settings.display_special_instructions %}offset-by-ten{% endunless %}">
+    <div class="columns desk-three tablet-four mobile-six update_subtotal_text">
       <p class="center">
         <a href="#" class="update_subtotal">{{ 'cart.general.update' | t }}</a>
         <br />
@@ -166,13 +143,13 @@
         
     </div>
 
-    <div class="columns desk-two">
+    <div class="columns desk-three tablet-four mobile-six">
       <p>
         <input type="submit" class="action_button" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
       </p>
       
       {% if additional_checkout_buttons %}
-        <p>
+        <p class="center">
           {{ content_for_additional_checkout_buttons | google_button_options: 'transparent' }}
         </p>
       {% endif %}

@@ -11,6 +11,20 @@ $mobile: 480px;
 	display: none;
 }
 
+.tablet-hide {
+
+	@media screen and (max-width: $tablet) {
+		display: none;
+	}
+}
+
+.mobile-hide {
+
+	@media screen and (max-width: $mobile) {
+		display: none;
+	}
+}
+
 body {
 	background: url("white_wall_hash.png");
 }
@@ -220,6 +234,22 @@ div.content {
 		font-weight: bold;
 	}
 }
+
+.checkout_table_header,
+.price_total,
+.remove_column,
+.update_subtotal_text {
+
+	@media screen and (max-width: $tablet) {
+		display: block;
+	}
+}
+
+.update_subtotal_text {
+	line-height: 1.2;
+}
+
+
 
 .cart__product {
 	

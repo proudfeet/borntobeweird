@@ -21,6 +21,11 @@ $mobile: 480px;
 	margin-right: 0;
 	margin-left: 0;
 
+	&.reset {
+		margin: 0;
+		padding: 0;
+	}
+
 	&.desk-one {
 		width: 8.333%;
 	}
@@ -71,7 +76,7 @@ $mobile: 480px;
 
 	@media screen and (max-width: $tablet) {
 
-		.tablet-down {
+		&.tablet-down {
 			display: block;
 		}
 		
@@ -127,7 +132,7 @@ $mobile: 480px;
 
 	@media screen and (max-width: $mobile) {
 
-		.mobile-down {
+		&.mobile-down {
 			display: block;
 		}
 		
