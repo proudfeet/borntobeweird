@@ -17,9 +17,9 @@
     {% endif %}
 
     <div class="info"> 
-      <span class="title">{{ product.title }}</span>
-      <span class="product_sku hide">{{ product.sku }}</span>                                             
-      <span class="price">
+      <div class="title center">{{ product.title }}</div>
+      <div class="product_sku hide">{{ product.sku }}</div>                                             
+      <div class="price center">
         {% if product.compare_at_price_max > product.price %}
           <span class="was_price">{{ product.compare_at_price_max | money }}</span>
         {% endif %}
@@ -35,7 +35,7 @@
         {% else %}
           {{ product.price_min | money }} - {{ 'products.product.sold_out' | t }}
         {% endif %}
-      </span>
+      </div>
     </div>
     {% if product.compare_at_price_max > product.price %}
       <div class="sale">{{ 'collections.general.sale' | t }}</div>

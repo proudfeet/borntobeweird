@@ -106,57 +106,53 @@
 {% endif %}
 
 {% if settings.homepage != blank %}
-  <div class="sixteen columns">
-  	<div class="section clearfix">
+  <div class="home-content__wrapper wrapper clearfix">
+  	<div class="columns desk-twelve section">
       {{ pages[settings.homepage].content }}
   	</div>
   </div>
 {% endif %}
 
-<div class="sixteen columns">
-	<div class="section clearfix">
 
-    {% if settings.blog_widget %}
-      <div class="alpha {% if settings.twitter_widget != blank %}two-thirds column{% else %}sixteen columns omega{% endif %}">
-        <h4 class="title"><a href="{{ blogs[settings.blog_widget_select].url }}">{{ 'home_page.recent_articles' | t }}</a></h4>
-        
-        {% for article in blogs[settings.blog_widget_select].articles limit:4 %}
-          <div class="{% if settings.twitter_widget != blank %}one-third column {% cycle 'alpha', 'omega' %}{% else %}four columns {% cycle 'alpha', '', '', 'omega' %}{% endif %}">
+{% if settings.blog_widget %}
+  <div class="alpha {% if settings.twitter_widget != blank %}two-thirds column{% else %}sixteen columns omega{% endif %}">
+    <h4 class="title"><a href="{{ blogs[settings.blog_widget_select].url }}">{{ 'home_page.recent_articles' | t }}</a></h4>
     
-            <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
-            <div class="meta">
-              <span class="label">{{ article.published_at | date: format: "month_day_year" }}</span>
-            </div>
-    
-            {% if article.excerpt == blank %}
-              <p>
-                {{ article.content | strip_html | truncatewords: 40 }}
-              </p>
-            {% else %}
-              {{ article.excerpt }}
-            {% endif %}                  
-          </div>
-          {% if settings.twitter_widget != blank %}
-            {% cycle '', '<br class="clear" />', '', '' %}
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
+    {% for article in blogs[settings.blog_widget_select].articles limit:4 %}
+      <div class="{% if settings.twitter_widget != blank %}one-third column {% cycle 'alpha', 'omega' %}{% else %}four columns {% cycle 'alpha', '', '', 'omega' %}{% endif %}">
 
-    {% if settings.twitter_widget != blank %}
-      <div class="{% if settings.blog_widget %}one-third column{% else %}sixteen columns alpha{% endif %} omega">
-        <h4 class="title"><a href="https://twitter.com/{{ settings.twitter_username }}" target="_blank">{{ 'home_page.tweets' | t }}</a></h4>
-        <a class="twitter-timeline" href="https://twitter.com/{{ settings.twitter_username }}" data-widget-id="319998048782647298" data-screen-name="{{ settings.twitter_username }}" data-chrome="noheader nofooter noborders transparent" data-link-color="{{ settings.link_color }}" data-heading-style="color:{{ settings.link_color }};font-size:{{ settings.regular_font_size }}px;{% if settings.regular_typeface_method == "google_webfonts" %}font-family: {{ settings.regular_google_webfont_font | replace: '+', ' ' }};{% else %}font-family: {{ settings.regular_websafe_font | replace: '+', ' ' }};{% endif %}"></a>
-        <script defer>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
+        <div class="meta">
+          <span class="label">{{ article.published_at | date: format: "month_day_year" }}</span>
+        </div>
+
+        {% if article.excerpt == blank %}
+          <p>
+            {{ article.content | strip_html | truncatewords: 40 }}
+          </p>
+        {% else %}
+          {{ article.excerpt }}
+        {% endif %}                  
       </div>
-    {% endif %}
+      {% if settings.twitter_widget != blank %}
+        {% cycle '', '<br class="clear" />', '', '' %}
+      {% endif %}
+    {% endfor %}
   </div>
-</div>
+{% endif %}
+
+{% if settings.twitter_widget != blank %}
+  <div class="{% if settings.blog_widget %}one-third column{% else %}sixteen columns alpha{% endif %} omega">
+    <h4 class="title"><a href="https://twitter.com/{{ settings.twitter_username }}" target="_blank">{{ 'home_page.tweets' | t }}</a></h4>
+    <a class="twitter-timeline" href="https://twitter.com/{{ settings.twitter_username }}" data-widget-id="319998048782647298" data-screen-name="{{ settings.twitter_username }}" data-chrome="noheader nofooter noborders transparent" data-link-color="{{ settings.link_color }}" data-heading-style="color:{{ settings.link_color }};font-size:{{ settings.regular_font_size }}px;{% if settings.regular_typeface_method == "google_webfonts" %}font-family: {{ settings.regular_google_webfont_font | replace: '+', ' ' }};{% else %}font-family: {{ settings.regular_websafe_font | replace: '+', ' ' }};{% endif %}"></a>
+    <script defer>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </div>
+{% endif %}
 
 {% if settings.instagram_widget %}
-  <div class="section clearfix">
-    <div class="sixteen columns">
-      <h4 class="title">
+  <div class="insta__wrapper wrapper clearfix">
+    <div class="columns desk-twelve section">
+      <h3 class="title center">
         {% if settings.instagram_link != blank %}
           <a href="{{ settings.instagram_link }}" target="_blank">
         {% endif %}
@@ -164,7 +160,7 @@
         {% if settings.instagram_link != blank %}
           </a>
         {% endif %}
-      </h4>
+      </h3>
     </div>
     
     <div id="instafeed" data-username="{{ settings.instagram_username | downcase }}" data-client-id="{{ settings.instagram_client_id }}" data-count="{{ settings.instagram_count }}"></div>

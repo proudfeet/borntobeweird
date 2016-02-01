@@ -155,11 +155,11 @@
       {% endif %}
 
       {% if template == "index" %}
-        <div class="home__hero" title="Born to be Weird, photo by Chalffy Chan, courtesy of Unsplash.com">
+        <div class="home__hero" title="Born to be Weird, photo by Elliott Engelman, courtesy of Unsplash.com">
           <div class="hero__content-container">
             <div class="wrapper">
               <h1 class="hero__header">Born to be Weird</h1>
-              <h3 class="hero__subheader">Waving at "normal" as it passes by</h3>
+              <h3 class="hero__subheader">Celebrating widespread weirdness</h3>
             </div>
           </div>
         </div>
@@ -199,12 +199,12 @@
       
     </div> <!-- end container -->
 
-    <div class="footer">
-      <div class="container">
-        <div class="sixteen columns">
+    <div class="footer clearfix">
+      <div class="wrapper">
+        <div class="columns desk-twelve">
 
           {% if linklists[settings.footer_linklist_2] != blank %}
-            <div class="three columns alpha footer_menu_vertical">
+            <div class="columns desk-four tablet-twelve footer_menu_vertical">
               <h6>{{ linklists[settings.footer_linklist_2].title }}</h6>
               <ul>
                 {% for link in linklists[settings.footer_linklist_2].links %}
@@ -215,18 +215,19 @@
           {% endif %}
 
           {% if settings.newsletter_enabled or settings.enable_social_links %}
-            <div class="ten columns {% if linklists[settings.footer_linklist_2] == blank %}offset-by-three alpha{% endif %}">
+            <div class="columns {% if linklists[settings.footer_linklist_2] == blank %}offset-by-three alpha{% endif %} desk-four tablet-twelve">
               {% if settings.newsletter_enabled %}
                 <h6>{{ 'general.newsletter_form.title' | t }}</h6>
                 <p>{{ 'general.newsletter_form.description' | t }}</p>
 
                 {% include 'newsletter' %}
               {% endif %} 
-              
-              {% if settings.enable_social_links %}
-                <br class="clear" />
-                {% include 'social-icons' %}
-              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if settings.enable_social_links %}
+            <div class="columns desk-four tablet-twelve">
+              {% include 'social-icons' %}  
             </div>
           {% endif %}
 
@@ -237,7 +238,7 @@
             </div>
           {% endif %}
 
-          <div class="sixteen columns alpha omega center">
+          <div class="columns desk-twelve center">
             <div class="section">
               {% if settings.newsletter_enabled or settings.enable_social_links %}
                 <hr />
