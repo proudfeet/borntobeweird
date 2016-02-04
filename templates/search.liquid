@@ -1,6 +1,6 @@
 {% assign search_pagination = settings.pagination_limit %}
 
-<div class="sixteen columns">
+<div class="columns desk-twelve">
   <div class="section clearfix">
     <h1>{{ 'general.search.title' | t }}</h1>
 
@@ -116,12 +116,12 @@
     </div>
   </div>
   <div class="section clearfix">  
-    <div class="ten columns offset-by-three columns center">
+    <div class="columns desk-six tablet-twelve center">
       <p class="extra_padding">
         {{ 'general.search.description' | t }}
       </p>
     </div>    
-    <div class="ten columns offset-by-three">
+    <div class="columns desk-six tablet-twelve">
       <form class="search" action="/search">
         {% if settings.search_option != 'everything' %}
           <input type="hidden" name="type" value="product" />

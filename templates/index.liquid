@@ -105,7 +105,7 @@
   </div>
 {% endif %}
 
-{% if settings.homepage != blank %}
+{% if settings.homepage.content != blank %}
   <div class="home-content__wrapper wrapper clearfix">
   	<div class="columns desk-twelve section">
       {{ pages[settings.homepage].content }}
