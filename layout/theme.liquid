@@ -83,7 +83,7 @@
               <span class="toggle__icon">&#x2261;</span>
             </label>
 
-            <a class="logo__container columns desk-one tablet-four" href="{{ shop.url }}">
+            <a class="logo__container columns desk-one tablet-four" title="{{ shop.title}}" href="{{ shop.url }}">
               <h1 class="logo">{{"bornToBeWeirdLogoV1Small.png" | asset_url | img_tag }}</h1>
             </a>
 
@@ -155,15 +155,22 @@
       {% endif %}
 
       {% if template == "index" %}
-        <div class="home__hero" title="Born to be Weird, photo by Elliott Engelman, courtesy of Unsplash.com">
+        <div class="home__hero" title="Born to be Weird, photo by Joey Arredondo, courtesy of Tired Eyes, ivegottiredeyes.tumblr.com">
           <div class="hero__content-container">
             <div class="wrapper">
               <h1 class="hero__header">Born to be Weird</h1>
               <h3 class="hero__subheader">Celebrating widespread weirdness</h3>
+              <div class="center shop-button__container">
+                <a href="{{ store.url }}/collections/all" class="action_button shop-button">Shop now</a>
+              </div>
             </div>
           </div>
         </div>
       {% endif %}
+
+      <div class="shipping__banner-container">
+        <h3 class="shipping__banner center">Free shipping on all orders over $75</h3>
+      </div>
 
       <div class="wrapper clearfix">
       {% comment %} open wrapper {% endcomment %}

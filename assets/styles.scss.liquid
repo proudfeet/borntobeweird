@@ -5,6 +5,7 @@ $mobile: 480px;
 // COLOURS
 $black: #222;
 $red: #be4333;
+$lightGrey: #e8e8e8;
 
 // FONTS
 $OpenSansCondensed: "Open Sans Condensed", sans-serif;
@@ -42,7 +43,6 @@ body {
 	position: fixed;
 	z-index: 100;
 	width: 100%;
-
 
 	.top_bar_search {
 		padding-right: 10px;
@@ -185,7 +185,7 @@ div.content {
 
 .home__hero {
 	padding-top: 42%;
-	background: url("https://images.unsplash.com/photo-1439792675105-701e6a4ab6f0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=4f1d1cfe4ed664efd7b97268a49e7170");
+	background: url("oregonForest.jpg");
 	background-size: cover;
 	position: relative;
 
@@ -207,17 +207,18 @@ div.content {
 		text-align: left;
 		line-height: 1;
 		border-bottom: none;
-		text-shadow: 0 0 100px #333, 1px 1px 0 rgba(0, 0, 0, 0.3), 0 1px 0 rgba(0, 0, 0, 0.3);
+		text-shadow: 0 0 100px #333, 1px 1px 0 rgba(0, 0, 0, 0.3), 0 15px 10px rgba(0, 0, 0, 0.3);
+		font-weight: bold;
 	}
 
 	.hero__header {
-		padding: 15% 10px 0;
+		padding: 10% 10px 0;
 		font-size: 92px;
-		font-weight: bold;
 		letter-spacing: -1px;
 
 		@media screen and (max-width: $tablet) {
 			font-size: 54px;
+			padding-top: 7%;
 		}
 
 		@media screen and (max-width: $mobile) {
@@ -227,13 +228,37 @@ div.content {
 
 	.hero__subheader {
 		padding: 0 10px;
+
+		@media screen and (max-width: $mobile) {
+			font-size: 18px;
+		}
+	}
+
+	.shop-button__container {
+		padding-top: 20px;
+
+		@media screen and (max-width: $tablet) {
+			padding-top: 15px;
+		}
+
+		@media screen and (max-width: $mobile) {
+			padding-top: 5px;
+		}
 	}
 }
 
-.homepage__featured {
+.shipping__banner-container {
+	background: $lightGrey;
 
-	.thumbnail {
+	.shipping__banner {
 		border-bottom: none;
+		color: $red;
+		padding: 10px 0;
+		font-weight: bold;
+
+		@media screen and (max-width: $mobile) {
+			font-size: 18px;
+		}
 	}
 }
 
@@ -279,6 +304,7 @@ div.insta__post {
 // ******************
 
 .thumbnail {
+	border-bottom: none;
 	
 	.title {
 		font-family: $OpenSansCondensed;
