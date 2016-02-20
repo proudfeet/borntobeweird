@@ -17,13 +17,13 @@
     {% endfor %}
     
     {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
-    <div class="{% if product.images.size > 1 %}multiple_product_images{% else %} single_product_image{% endif %} product_image_col feature_image">
+    <div class="{% if product.images.size > 1 %}product__thumbnail-multiple-images{% else %} single_product_image product__thumnail-single{% endif %} product_image_col feature_image">
       <a href="{{ featured_image | product_img_url: image_size }}" data-index="" title="{% if image.alt contains 'youtube' or image.alt contains 'vimeo' %}{{ product.title | escape }}{% else %}{{ featured_image.alt | escape }}{% endif %}">
         <img src="{{ featured_image | product_img_url: image_size }}" alt="{% if image.alt contains 'youtube' or image.alt contains 'vimeo' %}{{ product.title | escape }}{% else %}{{ featured_image.alt | escape }}{% endif %}" itemprop="image" />
       </a>
     </div>
 
-   {% comment %} <div class="two columns product_image_col thumbnails omega {% if product.images.size == 1 %}hidden{% endif %}">
+ {% comment %}   <div class="two columns product_image_col thumbnails omega {% if product.images.size == 1 %}hidden{% endif %}">
       {% for image in product.images %}
         {% if image.alt contains 'youtube' or image.alt contains 'vimeo' %}
           {% assign alt_text = product.title %}
@@ -61,7 +61,7 @@
     </div>
 
     {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
-    <div class="{% if product.images.size > 1 %}multiple_product_images{% else %} single_product_image{% endif %} product_image_col feature_image">
+    <div class="{% if product.images.size > 1 %}product__thumbnail--multiple-images{% else %} single_product_image{% endif %} product_image_col feature_image">
       <a href="{{ featured_image | product_img_url: image_size }}" data-index="" title="{% if image.alt contains 'youtube' or image.alt contains 'vimeo' %}{{ product.title | escape }}{% else %}{{ featured_image.alt | escape }}{% endif %}">
         <img src="{{ featured_image | product_img_url: image_size }}" alt="{% if image.alt contains 'youtube' or image.alt contains 'vimeo' %}{{ product.title | escape }}{% else %}{{ featured_image.alt | escape }}{% endif %}" itemprop="image" />
       </a>
