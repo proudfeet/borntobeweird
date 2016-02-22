@@ -156,13 +156,11 @@
 
       {% if template == "index" %}
         <div class="home__hero" title="Born to be Weird, photo by Joey Arredondo, courtesy of Tired Eyes, ivegottiredeyes.tumblr.com">
-          <div class="hero__content-container">
-            <div class="wrapper">
-              <h1 class="hero__header">Born to be Weird</h1>
-              <h3 class="hero__subheader">Celebrating widespread weirdness</h3>
-              <div class="center shop-button__container">
-                <a href="{{ store.url }}/collections/all" class="action_button shop-button">Shop now</a>
-              </div>
+          <div class="hero__content-container wrapper">
+            <h1 class="hero__header">Born to be Weird</h1>
+            <h3 class="hero__subheader">Celebrating widespread weirdness</h3>
+            <div class="center hero__button-container">
+              <a href="{{ store.url }}/collections/all" class="action_button shop-button hero__button">Shop now</a>
             </div>
           </div>
         </div>
@@ -310,5 +308,6 @@
     {% include 'newsletter-popup' %}
     {% include 'currencies' %}
     {{ 'ss-sandbox.js' | asset_url | script_tag }}
+    {% include 'ajaxify-cart' %}
   </body>
 </html>
