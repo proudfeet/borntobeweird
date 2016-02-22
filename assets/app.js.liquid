@@ -1,4 +1,9 @@
 $(function() {
+
+  $(".mobile-menu__toggle").click(function(ev){
+    ev.preventDefault();
+  });
+  
   $(".primary").lazyload({
     skip_invisible : false,
     threshold : 200,
