@@ -370,6 +370,37 @@ div.insta__post {
 	}
 }
 
+.delivery-surcharge__input {
+	visibility: hidden;
+
+	&:checked + label {
+
+		&::before {
+			content: "\2713";
+			width: auto;
+			height: auto;
+			padding: 0 1px;
+			line-height: 1;
+			top: 0;
+		}
+	}
+}
+
+.delivery-surcharge__label {
+
+	&::before {
+		content: "\00a0\00a0";
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		border: 1px solid black;
+		position: relative;
+		top: 5px;
+		border-radius: 1px;
+		margin-right: 5px;
+	}
+}
+
 // FOOTER
 
 div.footer {

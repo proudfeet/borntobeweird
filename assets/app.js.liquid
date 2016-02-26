@@ -1,7 +1,21 @@
 $(function() {
 
-  $(".mobile-menu__toggle").click(function(ev){
-    ev.preventDefault();
+  $("input#checkout").click(function(){
+    if ($("#delivery-surcharge__input").is(":checked")) {
+      var variantId = $("#delivery-surcharge__input").val();
+
+
+      $.ajax({
+        type: "POST",
+        url: "/cart/add.js",
+        data: {
+          id: variantId,
+          quantity: 1
+        }
+      });
+
+      
+    }
   });
   
   $(".primary").lazyload({
