@@ -35,48 +35,48 @@
     <ul class="cart__product-list">
     {% for item in cart.items %}
       <li class="cart__product">
-        <div class="columns desk-three product_row mobile-two">
-          <a href="{{ item.url }}" title="{{ item.title | escape }}">
-            <img src="{{ item | img_url: 'large' }}" alt="{{ item.title | escape }}" />
-          </a>
-        </div> 
-    
-        <div class="columns desk-three title_column mobile-two">
-          <p>
-            <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
-          </p> 
+        <div class="columns desk-six mobile-four product__image-name-container">
+          <div class="columns desk-six product_row product__image mobile-twelve">
+            <a href="{{ item.url }}" title="{{ item.title | escape }}">
+              <img src="{{ item | img_url: 'large' }}" alt="{{ item.title | escape }}" />
+            </a>
+          </div> 
           
-          {% if item.properties %}
+          <div class="columns desk-six title_column product__title mobile-twelve">
             <p>
-            {% for p in item.properties %}
-              {% unless p.last == blank %}
-                {% if p.last contains '/uploads/' %}
-                  {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
-                {% else %}
-                  {{ p.first }}: {{ p.last }}<br />
-                {% endif %}
-              {% endunless %}
-            {% endfor %}
+              <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
+            </p> 
+            
+            {% if item.properties %}
+              <p>
+              {% for p in item.properties %}
+                {% unless p.last == blank %}
+                  {% if p.last contains '/uploads/' %}
+                    {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a><br />
+                  {% else %}
+                    {{ p.first }}: {{ p.last }}<br />
+                  {% endif %}
+                {% endunless %}
+              {% endfor %}
+              </p>
+            {% endif %}
+            
+            <p class="cart_description">
+              {{ item.product.description | strip_html | truncatewords: settings.description_words | replace: 'Description', '' | replace: 'Specs', '' | replace: 'Shipping', '' | replace: 'Details', ''  }}
             </p>
-          {% endif %}
-          
-          <p class="cart_description">
-            {{ item.product.description | strip_html | truncatewords: settings.description_words | replace: 'Description', '' | replace: 'Specs', '' | replace: 'Shipping', '' | replace: 'Details', ''  }}
-          </p>
-          <p class="cart_sku mobile-hide">
-            SKU: {{ item.sku }}
-          </p>  
+            <p class="cart_sku mobile-hide">
+              SKU: {{ item.sku }}
+            </p>  
+          </div>
         </div>
-
-        <div class="clear mobile-down"></div>
     
-        <div class="columns desk-two center mobile-two">
+        <div class="columns desk-two center mobile-two product__price">
           <p class="price_total">
             {{ item.price | money }}
           </p>
         </div>
 
-        <div class="columns desk-one mobile-two center" id="quantity_{{ forloop.index }}">
+        <div class="columns desk-one mobile-two center product__quantity" id="quantity_{{ forloop.index }}">
           <input type="number" min="0" size="2" class="quantity center" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
         </div>
       
@@ -89,9 +89,7 @@
         </div>
     
         <div class="clear"></div>
-        <div class="sixteen columns">
-          <hr />
-        </div>
+
       </li>
     {% endfor %}
     </ul>
