@@ -31,9 +31,9 @@
             {% endif %}
             <small><em>{{ 'products.general.from' | t }}</em></small>
           {% endif %}
-          {{ product.price_min | money }}
+          {{ product.price_min | money }} {{ shop.currency }}
         {% else %}
-          {{ product.price_min | money }} - {{ 'products.product.sold_out' | t }}
+          {{ product.price_min | money }} {{ shop.currency }} - {{ 'products.product.sold_out' | t }}
         {% endif %}
       </div>
     </div>

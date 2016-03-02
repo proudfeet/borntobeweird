@@ -35,16 +35,18 @@
          
          <span class="was_price">
             {% if variant.price < variant.compare_at_price and variant.available %}
-              {{ variant.compare_at_price | money }}
+              {{ variant.compare_at_price | money }} {{ shop.currency }}
             {% endif %}
           </span>
           <span itemprop="price" content="{{ variant.price | money_without_currency }}" class="current_price">
             {% if variant.available %} 
-              {{ variant.price | money }} 
+              {{ variant.price | money }}
             {% else %} 
               {{ 'products.product.sold_out' | t }}
             {% endif %}
           </span>
+
+          {{ shop.currency }}
        </p>
      
        {% include 'product-notify-me' %}

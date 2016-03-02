@@ -72,7 +72,7 @@
     
         <div class="columns desk-two center mobile-two product__price">
           <p class="price_total">
-            {{ item.price | money }}
+            {{ item.price | money }} {{ shop.currency }}
           </p>
         </div>
 
@@ -81,7 +81,7 @@
         </div>
       
         <div class="columns desk-two mobile-two center">
-          <span class="price_total">{{ item.line_price | money }}</span>
+          <span class="price_total">{{ item.line_price | money }} {{ shop.currency }}</span>
         </div>
       
         <div class="columns desk-one mobile-two remove_column center">
